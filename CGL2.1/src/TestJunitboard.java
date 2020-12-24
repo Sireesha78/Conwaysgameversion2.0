@@ -1,10 +1,10 @@
+//@author P. Sireesha 2020501096
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class TestJunitboard {
 	@Test
 	public void testcreate() {
 		board c = new board(10);
-//		System.out.println(c);
 		c.createboard();
 		Assertions.assertEquals("..........\n"
 				+ "..........\n"

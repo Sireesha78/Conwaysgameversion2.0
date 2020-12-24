@@ -1,5 +1,6 @@
-
-public class board {
+//@author P. Sireesha 2020501096
+//Create board class
+public class board {								
 	cell[][] cell;
 	private int n;
 
@@ -7,31 +8,27 @@ public class board {
 		this.n = n;
 		this.cell = new cell[n][n];
 	}
-
+//Creating board method
 	public void createboard() {
-//		System.out.println(this.n);
+
 		for (int i = 0; i < this.n; i++) {
 			for (int j = 0; j < this.n; j++) {
 				this.cell[i][j] = new cell(false);
-//				System.out.print(this.cell[i][j].isalive());
+
 			}
 		}
 		
-//		return this;
-	}
 
+	}
+//Printing the board
 	public String printBoard() {
 		String con = "";
 		for (int i = 0; i < this.n; i++) {
 			for (int j = 0; j < this.n; j++) {
-//				System.out.println(cell[i][j]);
 				if (cell[i][j].status==true) {
 
 					con += "*";
 
-					if (j == this.n - 1 && i < this.n - 1) {
-						con = con + "\n";
-					}
 				} else {
 
 					con += ".";
@@ -46,33 +43,39 @@ public class board {
 		}
 		return con;
 	}
+	// modular division for corner cases  (Took help from team mate Sai chandra)
+	public int modulardiv(int m) {
+		
+		return (((m % n) + n) % n);
+	}
+	//Generating Next Generation board by checking 8 neighbours of the cell
 	public board generateNextGeneration(board b) {
 		
-        for(int i=1;i<this.n-1;i++){
-            for(int j=1;j<this.n-1;j++){
+        for(int i=0;i<this.n;i++){
+            for(int j=0;j<this.n;j++){
                 int count=0;
-                if(this.cell[i-1][j-1].status){
+                if(this.cell[modulardiv(i-1)][modulardiv(j-1)].status){
                     count+=1;
                 }
-                if(this.cell[i-1][j].status){
+                if(this.cell[modulardiv(i-1)][modulardiv(j)].status){
                     count+=1;
                 }
-                if(this.cell[i-1][j+1].status){
+                if(this.cell[modulardiv(i-1)][modulardiv(j+1)].status){
                     count+=1;
                 }
-                if(this.cell[i][j-1].status){
+                if(this.cell[modulardiv(i)][modulardiv(j-1)].status){
                     count+=1;
                 }
-                if(this.cell[i][j+1].status){
+                if(this.cell[modulardiv(i)][modulardiv(j+1)].status){
                     count+=1;
                 }
-                if(this.cell[i+1][j-1].status){
+                if(this.cell[modulardiv(i+1)][modulardiv(j-1)].status){
                     count+=1;
                 }
-                if(this.cell[i+1][j].status){
+                if(this.cell[modulardiv(i+1)][modulardiv(j)].status){
                     count+=1;
                 }
-                if(this.cell[i+1][j+1].status){
+                if(this.cell[modulardiv(i+1)][modulardiv(j+1)].status){
                     count+=1;
                 }
                 if(this.cell[i][j].status){
@@ -97,4 +100,6 @@ public class board {
 		
 		return this.printBoard();
 	}
+
+	 
 }
